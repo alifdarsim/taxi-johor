@@ -39,8 +39,12 @@ class AdminPanelProvider extends PanelProvider
             ->id('dashboard')
             ->path('dashboard')
             ->login()
-            ->colors([
-                'primary' => Color::Blue,
+//            ->colors([
+//                'primary' => Color::Red,
+//            ])
+            ->spa()
+            ->spaUrlExceptions(fn (): array => [
+                url('/dashboard/live-tracking'),
             ])
             ->font('Poppins')
             ->favicon(asset('favicon-32x32.png'))
@@ -49,13 +53,10 @@ class AdminPanelProvider extends PanelProvider
             ->pages([
                 Pages\Dashboard::class,
             ])
-//            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 StatsOverview::class,
                 LatestTaxiOnline::class,
                 ActiveAdvertisement::class
-//                Widgets\AccountWidget::class,
-//                Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -85,9 +86,8 @@ class AdminPanelProvider extends PanelProvider
                     ->shouldShowDeleteAccountForm()
                     ->shouldShowBrowserSessionsForm()
                     ->shouldShowAvatarForm(),
-                ThemesPlugin::make(),
-                FilamentSpatieLaravelBackupPlugin::make()
-                    ->usingPage(Backups::class),
+//                ThemesPlugin::make(),
+                FilamentSpatieLaravelBackupPlugin::make(),
                 FilamentSpatieLaravelHealthPlugin::make()
             ])
             ->authMiddleware([

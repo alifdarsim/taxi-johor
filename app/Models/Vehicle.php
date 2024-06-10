@@ -28,8 +28,8 @@ class Vehicle extends Model
         return $this->belongsToMany(Driver::class, 'driver_vehicle');
     }
 
-    public function taxiWrapper(): HasMany
+    public function advertisementHistory(): HasMany
     {
-        return $this->hasMany(TaxiWrapper::class);
+        return $this->hasMany(AdvertisementHistory::class);
     }
 }

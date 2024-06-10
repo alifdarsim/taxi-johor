@@ -5,32 +5,39 @@ namespace App\Models;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use MatanYadaev\EloquentSpatial\Objects\Point;
 
 /**
  * @mixin Builder
  */
-class LiveLocation extends Model
+class Location extends Model
 {
-    use HasFactory;
-    protected $table = 'live_locations';
+    protected $table = 'locations';
 
     protected $fillable = [
-        'driver_id',
-        'plate_number',
+        'number_plate',
         'coordinate',
         'timestamp',
         'speed',
         'accuracy',
+        'timestamp',
+        'location_date',
+        'session',
+        'processed',
     ];
 
     protected $casts = [
+        'processed' => 'boolean',
         'coordinate' => Point::class
     ];
 
-    public function driver(): BelongsTo
+    public function getLat()
     {
-        return $this->belongsTo(Driver::class);
+        return $this->coordinate->latitude;
+    }
+
+    public function getLng()
+    {
+        return $this->coordinate->longitude;
     }
 }
