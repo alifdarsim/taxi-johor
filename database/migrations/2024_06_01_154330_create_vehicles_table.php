@@ -20,7 +20,7 @@ return new class extends Migration
             $table->boolean('is_active')->default(true);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
-            $table->foreign('vehicle_type_id')->references('id')->on('vehicle_types')->onDelete('set null');
+            $table->foreign('vehicle_type_id')->references('id')->on('vehicle_types');
         });
     }
 
